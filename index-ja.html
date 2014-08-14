@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PR Plotter</title>
+    <title>自己記録の可視化</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -30,26 +30,29 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">PR Plotter</a>
+          <a class="navbar-brand" href="#">自己記録の可視化</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav pull-right">
-            <li class="active"><a href="index.html">English</a></li>
-            <li><a href="index-ja.html">日本語</a></li>
+            <li><a href="index.html">English</a></li>
+            <li class="active"><a href="index-ja.html">日本語</a></li>
           </ul>
-          <p class="navbar-text pull-right">Language:</p>
+          <p class="navbar-text pull-right">言語:</p>
         </div><!--/.nav-collapse -->
       </div>
     </div>
     <div class="container">
       <div class="starter-template">
-        <button class="btn btn-primary" id="btnEnterData" data-toggle="modal" data-target="#myModal">Enter data</button>
-        <button class="btn btn-primary" id="btnPlotGraph">Plot graph</button>
-        <button class="btn btn-primary" id="btnSaveCookie">Save data</button>
+        <p>
+          <button class="btn btn-primary" id="btnEnterData" data-toggle="modal" data-target="#myModal">データ入力</button>
+          <button class="btn btn-primary" id="btnPlotGraph">図を更新</button>
+          <button class="btn btn-primary" id="btnSaveCookie">データ保存</button>
+        </p>
 
         <div id="chart">
           <svg></svg>
         </div>
+
       </div>
 
     </div><!-- /.container -->
@@ -61,14 +64,14 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel">Enter Your PRs</h4>
+            <h4 class="modal-title" id="myModalLabel">自己記録を入力してください</h4>
           </div>
           <div class="modal-body form-horizontal">
             <table class="table" id="tblPr">
               <thead>
-                <th>Lift</th>
-                <th>Date</th>
-                <th>Weight (kg)</th>
+                <th>区分</th>
+                <th>日にち</th>
+                <th>重り (kg)</th>
                 <th></th>
               </thead>
               <tbody>
@@ -78,21 +81,21 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="control-group">
-                  <label for="inputLiftType" class="control-label">Lift:</label>
+                  <label for="inputLiftType" class="control-label">区分:</label>
                   <div class="controls">
                     <select id="inputLiftType" class="form-control">
-                      <option value="Bench press">Bench press</option>
-                      <option value="Press">Press</option>
-                      <option value="Deadlift">Deadlift</option>
-                      <option value="Front squat">Front squat</option>
-                      <option value="Backsquat">Back squat</option>
+                      <option value="Bench press">ベンチプレス</option>
+                      <option value="Press">プレス</option>
+                      <option value="Deadlift">デッドリフト</option>
+                      <option value="Front squat">フロントスクワット</option>
+                      <option value="Backsquat">バックスクワット</option>
                     </select>
                   </div>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="control-group">
-                  <label for="date" class="control-label" >Date:</label>
+                  <label for="date" class="control-label" >日にち:</label>
                   <div class="controls">
                     <input type="text" id="inputDate" class="form-control" placeholder="yyyy/mm/dd">
                   </div>
@@ -100,7 +103,7 @@
               </div>
               <div class="col-sm-4">
                 <div class="control-group">
-                  <label for="inputWeight" class="control-label">Weight:</label>
+                  <label for="inputWeight" class="control-label">重り:</label>
                   <div class="controls">
                     <input type="text" class="form-control" id="inputWeight">
                   </div>
@@ -109,9 +112,9 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary" id="btnAdd">Add PR</button>
-            <button class="btn btn-danger" id="btnClear">Clear table</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-primary" id="btnAdd">記録追加</button>
+            <button class="btn btn-danger" id="btnClear">全記録削除</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
           </div>
         </div>
       </div>
@@ -127,7 +130,7 @@
 
     <script>
       var theData = [];
-      var btnDeleteString = "Delete";
+      var btnDeleteString = "削除";
     </script>
     <script src="strength.js"></script>
 

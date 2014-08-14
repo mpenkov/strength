@@ -1,0 +1,18 @@
+body {
+  padding-top: 50px;
+}
+
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+#chart svg {
+  height: 400px;
+}
+
+/* http://stackoverflow.com/questions/18530459/nvd3-js-bigger-points-in-a-line-chart */
+.nvd3 .nv-groups .nv-point {
+  stroke-opacity: 0.2 !important;
+  stroke-width: 10px;
+}

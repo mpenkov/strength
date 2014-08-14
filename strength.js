@@ -128,7 +128,6 @@ $("#btnClear").click(function() {
     theData = [];
     redrawTable();
 });
-$("#btnPlotGraph").click(plotGraph);
 $("#btnAdd").click(function() {
     var lift = $("#inputLiftType").val();
     var date = $("#inputDate").val();
@@ -155,7 +154,7 @@ $("#btnAdd").click(function() {
     redrawTable();
 });
 
-$("#btnSaveCookie").click(function() {
+function saveCookie() {
     // http://stackoverflow.com/questions/191881/serializing-to-json-in-jquery
     var cookie = ["theData=", JSON.stringify(theData), "; path=/;"].join("");
     console.debug(cookie);
@@ -167,7 +166,7 @@ $("#btnSaveCookie").click(function() {
     // /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --enable-file-cookies
     //
     document.cookie = cookie;
-});
+}
 
 // http://stackoverflow.com/questions/10730362/get-cookie-by-name
 function getCookie(name) {
@@ -191,3 +190,12 @@ window.onload = function() {
     redrawTable();
     plotGraph();
 }
+
+//
+// http://stackoverflow.com/questions/12319171/how-to-handle-the-modal-closing-event-in-twitter-bootstrap
+//
+$('#myModal').on('hidden.bs.modal', function () {
+    console.debug("modal has been closed");
+    saveCookie();
+    plotGraph();
+})

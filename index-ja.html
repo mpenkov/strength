@@ -56,13 +56,13 @@
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title" id="myModalLabel">自己記録を入力してください</h4>
           </div>
-          <div class="modal-body form-horizontal">
+          <div class="modal-body">
             <table class="table" id="tblPr">
               <thead>
                 <th>区分</th>
@@ -73,42 +73,29 @@
               <tbody>
               </tbody>
             </table>
-
-            <div class="row">
-              <div class="col-sm-4">
-                <div class="control-group" id="groupLift">
-                  <label for="inputLiftType" class="control-label">区分:</label>
-                  <div class="controls">
-                    <select id="inputLiftType" class="form-control">
-                      <option value="Bench press">ベンチプレス</option>
-                      <option value="Press">プレス</option>
-                      <option value="Deadlift">デッドリフト</option>
-                      <option value="Front squat">フロントスクワット</option>
-                      <option value="Backsquat">バックスクワット</option>
-                    </select>
-                  </div>
+            <form class="form-inline" role="form">
+                <div class="form-group" id="groupLift">
+                  <label for="inputLiftType">Lift:</label>
+                  <select id="inputLiftType" class="form-control">
+                    <option value="Bench press">ベンチプレス</option>
+                    <option value="Press">プレス</option>
+                    <option value="Deadlift">デッドリフト</option>
+                    <option value="Front squat">フロントスクワット</option>
+                    <option value="Back squat">バックスクワット</option>
+                  </select>
                 </div>
-              </div>
-              <div class="col-sm-4">
-                <div class="control-group" id="groupDate">
-                  <label for="date" class="control-label" >日にち:</label>
-                  <div class="controls">
-                    <input type="text" id="inputDate" class="form-control" placeholder="yyyy/mm/dd">
-                  </div>
+                <div class="form-group" id="groupDate">
+                  <label for="date">日にち:</label>
+                  <input type="text" id="inputDate" class="form-control" placeholder="yyyy/mm/dd">
                 </div>
-              </div>
-              <div class="col-sm-4">
-                <div class="control-group" id="groupWeight">
+                <div class="form-group" id="groupWeight">
                   <label for="inputWeight" class="control-label">重り:</label>
-                  <div class="controls">
-                    <input type="text" class="form-control" id="inputWeight">
-                  </div>
+                  <input type="number" class="form-control" id="inputWeight" min="1" max="1000">
                 </div>
-              </div>
-            </div>
+                <button type="button" class="btn btn-primary" id="btnAdd">追加</button>
+            </form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary" id="btnAdd">記録追加</button>
             <button class="btn btn-danger" id="btnClear">全記録削除</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
           </div>

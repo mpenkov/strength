@@ -101,7 +101,7 @@ function plotGraph() {
             .margin({left: 100, right: 100})
         ;
 
-        var dateFormatter = function(d) { return d3.time.format("%x")(new Date(d)) };
+        var dateFormatter = function(d) { return d3.time.format("%Y/%m/%d")(new Date(d)) };
         chart.xAxis
             .axisLabel("Date")
             .tickFormat(dateFormatter);

@@ -182,6 +182,9 @@ window.onload = function() {
     console.debug(cookie);
     if (cookie) {
         theData = JSON.parse(cookie);
+        if (theData.length === 0) {
+            theData = dummyData();
+        }
     } else {
         theData = dummyData();
     }

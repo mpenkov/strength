@@ -79,7 +79,7 @@ function inception(i, j) {
     }
 }
 
-function parse(str) {
+function parseDate(str) {
     if(!/^\d{4}\/\d{2}\/\d{2}$/.test(str)) return "invalid date";
     var y = str.substr(0,4),
             m = str.substr(5,2),
@@ -92,7 +92,7 @@ function plotGraph() {
         var chart = nv.models.lineChart()
             //.useInteractiveGuideline(true)
             .x(function (d) {
-                return parse(d[0]);
+                return parseDate(d[0]);
             })
             .y(function (d) {
                 return d[1];
@@ -131,13 +131,25 @@ $("#btnClear").click(function() {
 $("#btnAdd").click(function() {
     var lift = $("#inputLiftType").val();
     var date = $("#inputDate").val();
-    var weight = parseInt($("#inputWeight").val(), 10);
+    var weight = parseFloat($("#inputWeight").val(), 10);
+
+    $("#groupLift").removeClass("has-error");
+
+    if (parseDate(date) == "invalid date") {
+        $("#groupDate").addClass("has-error");
+        return;
+    }
+    $("#groupDate").removeClass("has-error");
+
+    if (isNaN(weight) || weight < 0) {
+        $("#groupWeight").addClass("has-error");
+        return;
+    }
+    $("#groupWeight").removeClass("has-error");
 
     console.debug(lift);
     console.debug(date);
     console.debug(weight);
-
-    // TODO: check format
 
     var idx = -1;
     for (var i = 0; i < theData.length; ++i) {
@@ -149,6 +161,16 @@ $("#btnAdd").click(function() {
     if (idx === -1) {
         theData.push({key: lift, values: [[date, weight]]});
     } else {
+        //
+        // Check if we already have a PR on this day
+        //
+        for (var j = 0; j < theData[i].values.length; ++j) {
+            if (theData[i].values[j][0] == date) {
+                $("#groupDate").addClass("has-error");
+                $("#groupLift").addClass("has-error");
+                return;
+            }
+        }
         theData[i].values.push([date, weight]);
     }
     redrawTable();

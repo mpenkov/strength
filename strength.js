@@ -116,7 +116,9 @@ function plotGraph() {
             .margin({left: 100, right: 100})
         ;
 
-        var dateFormatter = function(d) { return d3.time.format("%Y/%m/%d")(new Date(d)) };
+        var dateFormatter = function(d) {
+            return d3.time.format("%Y/%m/%d")(new Date(d))
+        };
         chart.xAxis
             .axisLabel("Date")
             .tickFormat(dateFormatter);
@@ -187,6 +189,7 @@ function btnAdd_onClick() {
         }
         theData[i].values.push([date, weight]);
     }
+
     redrawTable();
 }
 
@@ -197,7 +200,7 @@ function saveCookie() {
     //
     // This won"t work unless Chrome is started with --enable-file-cookies
     // http://stackoverflow.com/questions/6232331/setting-cookies-using-javascript-in-a-local-html-file
-    // 
+    //
     // On, OS/X, start with:
     // /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --enable-file-cookies
     //

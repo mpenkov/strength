@@ -91,7 +91,7 @@ function inception(i, j) {
         console.debug(i + " " + j);
         theData[i].values.splice(j, 1);
         redrawTable();
-    }
+    };
 }
 
 function parseDate(str) {
@@ -117,12 +117,11 @@ function plotGraph() {
         ;
 
         var dateFormatter = function(d) {
-            return d3.time.format("%Y/%m/%d")(new Date(d))
+            return d3.time.format("%Y/%m/%d")(new Date(d));
         };
         chart.xAxis
             .axisLabel("Date")
             .tickFormat(dateFormatter);
-            ;
 
         chart.yAxis
             .axisLabel("Weight (kg)")
@@ -228,7 +227,7 @@ window.onload = function() {
     }
     redrawTable();
     plotGraph();
-}
+};
 
 //
 // http://stackoverflow.com/questions/12319171/how-to-handle-the-modal-closing-event-in-twitter-bootstrap
@@ -239,7 +238,7 @@ $('#myModal').on('hidden.bs.modal', function () {
     $("#groupWeight").removeClass("has-error");
     saveCookie();
     plotGraph();
-})
+});
 
 $("#ulPills > li").click(function () {
     var key = this.getAttribute("key");
@@ -249,9 +248,10 @@ $("#ulPills > li").click(function () {
 });
 
 function sortData() {
+    function comparator(a, b) {
+        return parseDate(a[0]) - parseDate(b[0]);
+    }
     for (var i = 0; i < theData.length; ++i) {
-        theData[i].values.sort(function (a, b) {
-            return parseDate(a[0]) - parseDate(b[0]);
-        });
+        theData[i].values.sort(comparator);
     }
 }

@@ -51,12 +51,18 @@ function dummyData() {
 
 function redrawTable() {
     console.debug("redrawTable");
+    var key = $("#ulPills > li[class='active']").attr("key");
+    var lastRow = $("#trLast");
+    console.debug(key);
     $("#tblPr > tbody").empty();
+    var body = $("#tblPr").find("tbody");
     for (var i = 0; i < theData.length; ++i) {
         var liftData = theData[i];
+        if (liftData.key != key) {
+            continue;
+        }
         for (var j = 0; j < liftData.values.length; ++j) {
             var row = $("<tr>")
-                .append($("<td>").html(liftData.key))
                 .append($("<td>").html(liftData.values[j][0]))
                 .append($("<td>").html(liftData.values[j][1]))
                 .append($("<td>")
@@ -66,9 +72,15 @@ function redrawTable() {
                         .append(btnDeleteString)
                     )
                 );
-            $("#tblPr").find("tbody").append(row);
+            body.append(row);
         }
     }
+    body.append(lastRow);
+
+    //
+    // TODO: not sure why we have to add this handler every time...
+    //
+    $("#btnAdd").click(btnAdd_onClick);
 }
 
 function inception(i, j) {
@@ -128,12 +140,12 @@ $("#btnClear").click(function() {
     theData = [];
     redrawTable();
 });
-$("#btnAdd").click(function() {
-    var lift = $("#inputLiftType").val();
+
+function btnAdd_onClick() {
+    console.debug("btnAdd clicked");
+    var lift = $("#ulPills > li[class='active']").attr("key");
     var date = $("#inputDate").val();
     var weight = parseFloat($("#inputWeight").val(), 10);
-
-    $("#groupLift").removeClass("has-error");
 
     if (parseDate(date) == "invalid date") {
         $("#groupDate").addClass("has-error");
@@ -167,14 +179,13 @@ $("#btnAdd").click(function() {
         for (var j = 0; j < theData[i].values.length; ++j) {
             if (theData[i].values[j][0] == date) {
                 $("#groupDate").addClass("has-error");
-                $("#groupLift").addClass("has-error");
                 return;
             }
         }
         theData[i].values.push([date, weight]);
     }
     redrawTable();
-});
+}
 
 function saveCookie() {
     // http://stackoverflow.com/questions/191881/serializing-to-json-in-jquery
@@ -218,6 +229,15 @@ window.onload = function() {
 //
 $('#myModal').on('hidden.bs.modal', function () {
     console.debug("modal has been closed");
+    $("#groupDate").removeClass("has-error");
+    $("#groupWeight").removeClass("has-error");
     saveCookie();
     plotGraph();
 })
+
+$("#ulPills > li").click(function () {
+    var key = this.getAttribute("key");
+    $("#ulPills > li[class='active']").removeClass("active");
+    $(this).addClass("active");
+    redrawTable();
+});

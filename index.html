@@ -43,7 +43,7 @@
     </div>
     <div class="container">
       <div class="starter-template">
-        <button class="btn btn-primary" id="btnEnterData" data-toggle="modal" data-target="#myModal">Enter data</button>
+        <button class="btn btn-lg btn-primary" id="btnEnterData" data-toggle="modal" data-target="#myModal">Enter data</button>
 
         <div id="chart">
           <svg></svg>
@@ -55,48 +55,45 @@
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title" id="myModalLabel">Enter Your PRs</h4>
           </div>
           <div class="modal-body">
+            <ul id="ulPills" class="nav nav-pills">
+              <li key="Bench press" class="active"><a href="#">Bench press</a></li>
+              <li key="Press"><a href="#">Press</a></li>
+              <li key="Deadlift"><a href="#">Deadlift</a></li>
+              <li key="Back squat"><a href="#">Back squat</a></li>
+              <li key="Front squat"><a href="#">Front squat</a></li>
+            </ul>
             <table class="table" id="tblPr">
               <thead>
-                <th>Lift</th>
                 <th>Date</th>
                 <th>Weight (kg)</th>
                 <th></th>
               </thead>
               <tbody>
+                <tr id="trLast">
+                  <td>
+                    <div class="form-group" id="groupDate">
+                      <input type="text" id="inputDate" class="form-control" placeholder="yyyy/mm/dd">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group" id="groupWeight">
+                      <input type="number" class="form-control" id="inputWeight" min="1" max="1000">
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-primary" id="btnAdd">Add</button></td>
+                </tr>
               </tbody>
             </table>
-
-            <form class="form-inline" role="form">
-                <div class="form-group" id="groupLift">
-                  <label for="inputLiftType">Lift:</label>
-                  <select id="inputLiftType" class="form-control">
-                    <option value="Bench press">Bench press</option>
-                    <option value="Press">Press</option>
-                    <option value="Deadlift">Deadlift</option>
-                    <option value="Front squat">Front squat</option>
-                    <option value="Back squat">Back squat</option>
-                  </select>
-                </div>
-                <div class="form-group" id="groupDate">
-                  <label for="date">Date:</label>
-                  <input type="text" id="inputDate" class="form-control" placeholder="yyyy/mm/dd">
-                </div>
-                <div class="form-group" id="groupWeight">
-                  <label for="inputWeight" class="control-label">Weight:</label>
-                  <input type="number" class="form-control" id="inputWeight" min="1" max="1000">
-                </div>
-                <button type="button" class="btn btn-primary" id="btnAdd">Add</button>
-            </form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-danger" id="btnClear">Clear table</button>
+            <button class="btn btn-danger" id="btnClear">Clear all PRs</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>

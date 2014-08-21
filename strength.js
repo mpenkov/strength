@@ -96,9 +96,9 @@ function inception(i, j) {
 
 function parseDate(str) {
     if(!/^\d{4}\/\d{2}\/\d{2}$/.test(str)) return "invalid date";
-    var y = str.substr(0,4),
-            m = str.substr(5,2),
-            d = str.substr(8,2);
+    var y = str.substr(0,4);
+    var m = parseInt(str.substr(5,2), 10) - 1; // January is 0
+    var d = str.substr(8,2);
     return new Date(y,m,d).getTime();
 }
 

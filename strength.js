@@ -51,6 +51,9 @@ function dummyData() {
 
 function redrawTable() {
     console.debug("redrawTable");
+
+    sortData();
+
     var key = $("#ulPills > li[class='active']").attr("key");
     var lastRow = $("#trLast");
     console.debug(key);
@@ -241,3 +244,11 @@ $("#ulPills > li").click(function () {
     $(this).addClass("active");
     redrawTable();
 });
+
+function sortData() {
+    for (var i = 0; i < theData.length; ++i) {
+        theData[i].values.sort(function (a, b) {
+            return parseDate(a[0]) - parseDate(b[0]);
+        });
+    }
+}
